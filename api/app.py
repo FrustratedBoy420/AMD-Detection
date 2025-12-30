@@ -59,10 +59,10 @@ async def predict(file: UploadFile = File(...)):
     # 3. Logic and Syntax Fix (Chance calculation)
     # Note: "Nromal" typo theek karke "Normal" kiya gaya hai
     if pred_value >= 0.5:
-        result = "Normal"
+        result = "Negative"
         chance = pred_value * 100
     else:
-        result = "Age Related Macular Degeneration"
+        result = "Positive"
         chance = (1 - pred_value) * 100
 
     # 4. Result Formatting
@@ -70,3 +70,4 @@ async def predict(file: UploadFile = File(...)):
         "Detected": result,
         "Chance": f"{chance:.2f}%"
     }
+
