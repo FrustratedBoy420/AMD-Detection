@@ -10,6 +10,13 @@ import tf_keras
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Model load logic
 MODEL_PATH = os.path.join(os.getcwd(), "amd_model.keras")
 
@@ -41,9 +48,12 @@ async def predict(file: UploadFile = File(...)):
     pred_value = float(prediction[0][0])
 
     if pred_value >= 0.5:
-        result = f"Nromal Chances {pred_value:.2f}"
+        result = f"Nromal"
+        chance=pred_value:.2f
     else:
-        result = f"Age Related Macular Degeneration Chances ({1 - pred_value:.2f})"
+        result = f"Age Related Macular Degeneration"
+        chance=1 - pred_value:.2f
 
-    return result
+    return {"Detected":result,"Chance":chance}
+
 
