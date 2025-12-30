@@ -41,8 +41,9 @@ async def predict(file: UploadFile = File(...)):
     pred_value = float(prediction[0][0])
 
     if pred_value >= 0.5:
-        result = f"AMD Detected ({pred_value:.2f})"
+        result = f"Nromal Chances {pred_value:.2f}"
     else:
-        result = f"Normal ({1 - pred_value:.2f})"
+        result = f"Age Related Macular Degeneration Chances ({1 - pred_value:.2f})"
 
-    return {"prediction": result, "score": pred_value}
+    return result
+
