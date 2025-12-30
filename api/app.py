@@ -54,6 +54,7 @@ async def predict(file: UploadFile = File(...)):
         result = f"Age Related Macular Degeneration"
         chance=1 - pred_value:.2f
 
-    return {"Detected":result,"Chance":chance}
+    return {"Detected":result,"Chance":f"{chance}%"}
+
 
 
